@@ -18,7 +18,12 @@ namespace PluginTemplate
             try
             {
                 traceObj.Trace("Plugin Starts");
-               
+                IOrganizationService _service = serviceFactory.CreateOrganizationService(pluginContext.UserId);
+                if (pluginContext.Depth > 1)
+                    return;
+                Entity ExecutingEntity = (Entity)pluginContext.InputParameters["Target"];
+                if (ExecutingEntity.LogicalName != "") // Entity Name needed 
+                    return;
 
                 traceObj.Trace("Plugin Ends With No Excepption");
             }
